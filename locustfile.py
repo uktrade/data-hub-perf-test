@@ -1,8 +1,11 @@
 from locust import HttpLocust, TaskSet, task
 import os
+import random
 
 cookie = os.environ['COOKIE']
 print(cookie)
+
+searchables = ['apple', 'banana', 'carrot', 'date', 'eastern', 'forge', 'great', 'harris', 'incorporated', 'james']
 
 
 class Interactions(TaskSet):
@@ -44,6 +47,12 @@ class Companies(TaskSet):
     @task()
     def filter_companies(l):
         l.client.get("/companies?custom=true&sector=b322c9d2-5f95-e211-a939-e4115bead28a&sortby=modified_on%3Adesc")
+
+    @task()
+    def search_companies(l):
+        term = random.choice(searchables)
+        print(term)
+        l.client.get("/search/companies?term=" + term)
 
 
 class InteractionUser(HttpLocust):
