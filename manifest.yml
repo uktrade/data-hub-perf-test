@@ -1,0 +1,9 @@
+applications:
+- name: locust
+  command: locust --port=$PORT --web-host=0.0.0.0 -H http://www.datahub.staging.uktrade.io
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  routes:
+  - route: locust.cloudapps.digital
+  stack: cflinuxfs2
