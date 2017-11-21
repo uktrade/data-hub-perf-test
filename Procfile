@@ -1,1 +1,1 @@
-web: locust --port=$PORT --web-host=0.0.0.0 -H http://www.datahub.staging.uktrade.io
+web: locust --port=$PORT --web-host=0.0.0.0 -H $TARGET

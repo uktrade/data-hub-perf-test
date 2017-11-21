@@ -1,9 +1,13 @@
 from locust import HttpLocust, TaskSet, task
+import os
+
+cookie = os.environ['COOKIE']
+print(cookie)
 
 
 class Interactions(TaskSet):
     def login(l):
-        l.client.request('GET', '/', cookies = {'datahub.sid': 's%3A7cuTN6eEQ_Z0IE_mO7HTXUtTh1mgvA45.xoBBJSRRFfZ1Fu34PzBOveN7wBsM2O03rXzKZjosZ%2BM'})
+        l.client.request('GET', '/', cookies = {'datahub.sid': cookie})
 
     def on_start(self):
         """ on_start is called when a Locust start before any task is scheduled """
@@ -21,11 +25,33 @@ class Interactions(TaskSet):
     def resort_interactions(l):
         l.client.get("/interactions?custom=true&sortby=dit_adviser.name%3Aasc")
 
-class CompanyUser(TaskSet):
-    def on_
+class Companies(TaskSet):
+    def login(l):
+        l.client.request('GET', '/', cookies = {'datahub.sid': cookie})
+
+    def on_start(self):
+        """ on_start is called when a Locust start before any task is scheduled """
+        self.login()
+
+    @task()
+    def companies(l):
+        l.client.get("/companies?sortby=modified_on%3Adesc")
+
+    @task()
+    def single_company(l):
+        l.client.get("/companies/7f196945-e78e-47f7-85c7-250f07a9a4be/details")
+
+    @task()
+    def filter_companies(l):
+        l.client.get("/companies?custom=true&sector=b322c9d2-5f95-e211-a939-e4115bead28a&sortby=modified_on%3Adesc")
+
 
 class InteractionUser(HttpLocust):
     task_set = Interactions
     min_wait = 5000
     max_wait = 9000
 
+class CompanyUser(HttpLocust):
+    task_set = Companies
+    min_wait = 5000
+    max_wait = 9000
