@@ -2,8 +2,8 @@ from locust import HttpLocust, TaskSet, task
 
 
 class Interactions(TaskSet):
-def login(l):
-    l.client.request('GET', '/', cookies = {'datahub.sid': 's%3A7cuTN6eEQ_Z0IE_mO7HTXUtTh1mgvA45.xoBBJSRRFfZ1Fu34PzBOveN7wBsM2O03rXzKZjosZ%2BM'})
+    def login(l):
+        l.client.request('GET', '/', cookies = {'datahub.sid': 's%3A7cuTN6eEQ_Z0IE_mO7HTXUtTh1mgvA45.xoBBJSRRFfZ1Fu34PzBOveN7wBsM2O03rXzKZjosZ%2BM'})
 
     def on_start(self):
         """ on_start is called when a Locust start before any task is scheduled """
@@ -21,8 +21,8 @@ def login(l):
     def resort_interactions(l):
         l.client.get("/interactions?custom=true&sortby=dit_adviser.name%3Aasc")
 
-# class CompanyUser(TaskSet):
-#     def on_
+class CompanyUser(TaskSet):
+    def on_
 
 class InteractionUser(HttpLocust):
     task_set = Interactions
