@@ -1,1 +1,1 @@
-web: locust --port=$PORT --web-host=0.0.0.0 -H $TARGET
+web:  locust --port=$PORT --web-host=0.0.0.0 -H $TARGET
