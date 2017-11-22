@@ -51,7 +51,6 @@ class Companies(TaskSet):
     @task()
     def search_companies(l):
         term = random.choice(searchables)
-        print(term)
         l.client.get("/search/companies?term=" + term)
 
 
