@@ -5,6 +5,7 @@ import random
 cookie = os.environ['COOKIE']
 print(cookie)
 
+
 searchables = ['apple', 'banana', 'carrot', 'date', 'eastern', 'forge', 'great', 'harris', 'incorporated', 'james']
 
 
@@ -22,7 +23,7 @@ class Interactions(TaskSet):
 
     @task()
     def single_interaction(l):
-        l.client.get("/interactions/1c32d422-5d4b-42f8-81d7-8b2eed54c98e")
+        l.client.get("/interactions/aca7bb92-59b4-43d7-b0fa-019cdda36f1d")
 
     @task()
     def resort_interactions(l):
@@ -42,11 +43,11 @@ class Companies(TaskSet):
 
     @task()
     def single_company(l):
-        l.client.get("/companies/7f196945-e78e-47f7-85c7-250f07a9a4be/details")
+        l.client.get("/companies/6eb6db56-5ae4-41ac-99f1-65ab4b7a9ef6/details")
 
     @task()
     def filter_companies(l):
-        l.client.get("/companies?custom=true&sector=b322c9d2-5f95-e211-a939-e4115bead28a&sortby=modified_on%3Adesc")
+        l.client.get("/companies?custom=true&sector=9538cecc-5f95-e211-a939-e4115bead28a&sortby=modified_on%3Aasc")
 
     @task()
     def search_companies(l):
